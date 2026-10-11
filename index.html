@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Couture Byte Market — Moda femenina con carácter</title>
+<meta name="description" content="Couture Byte Market — vestidos, blusas, pantalones y conjuntos pensados para tu estilo. Compra fácil, entrega por WhatsApp.">
+<meta name="theme-color" content="#FBD9E7"><link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎀</text></svg>">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- Franja de aviso arriba de la tienda. Se muestra SOLO si activas "Aviso" o cierras la tienda en Panel → Configuración. -->
+<div class="store-notice" id="storeNotice" hidden>
+  <span id="storeNoticeText"></span>
+  <button type="button" class="store-notice-close" id="storeNoticeClose" aria-label="Cerrar aviso">×</button>
+</div>
+
+
+<!-- ============ ENCABEZADO ============ -->
+<header class="site-header">
+  <div class="header-inner">
+    <a href="#inicio" class="brand">
+      <svg class="brand-mark" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="markGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="var(--rose-deep)"/>
+            <stop offset="52%" stop-color="var(--gold)"/>
+            <stop offset="100%" stop-color="var(--lilac-deep)"/>
+          </linearGradient>
+        </defs>
+        <circle cx="30" cy="32" r="25" fill="url(#markGrad)"/>
+        <circle cx="30" cy="32" r="25" fill="none" stroke="#fff" stroke-width="1" opacity="0.5"/>
+        <ellipse cx="22" cy="20" rx="10" ry="6" fill="#fff" opacity="0.22" transform="rotate(-25 22 20)"/>
+        <text x="30" y="41" text-anchor="middle" font-family="var(--font-display)" font-style="italic" font-weight="600" font-size="23" letter-spacing="-1" fill="#fff">CB</text>
+        <g class="mark-bow" transform="translate(30,6) scale(0.62)">
+          <path d="M-1,1 C-4,-7 -15,-8 -16,0 C-17,8 -6,8 -1,1 Z" fill="var(--gold)"/>
+          <path d="M1,1 C4,-7 15,-8 16,0 C17,8 6,8 1,1 Z" fill="var(--gold)"/>
+          <path d="M-1,1 C-3,-4 -10,-5 -11,0 C-12,5 -5,5 -1,1 Z" fill="#fff" opacity="0.3"/>
+          <path d="M1,1 C3,-4 10,-5 11,0 C12,5 5,5 1,1 Z" fill="#fff" opacity="0.3"/>
+          <circle cx="0" cy="1" r="2.8" fill="var(--gold)"/>
+        </g>
+        <g class="mark-sparkle">
+          <path d="M46,15 L47.4,18.6 L51,20 L47.4,21.4 L46,25 L44.6,21.4 L41,20 L44.6,18.6 Z" fill="#fff"/>
+          <circle class="mark-sparkle-dot" cx="16" cy="46" r="1.8" fill="#fff"/>
+        </g>
+      </svg>
+      <span>
+        <span class="brand-name">Couture Byte Market</span>
+        <span class="brand-tag">Moda femenina</span>
+      </span>
+    </a>
+
+    <nav class="main-nav">
+      <a href="#coleccion">Nueva colección</a>
+      <a href="#catalogo">Catálogo</a>
+      <a href="#destacados">Destacados</a>
+      <a href="#ubicacion">Ubicación</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+
+    <div class="header-actions">
+      <div class="search-box">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" id="searchInput" placeholder="Buscar vestidos, blusas..." autocomplete="off">
+        <div class="search-suggestions" id="searchSuggestions"></div>
+      </div>
+      <a href="admin.html" class="admin-link">Administrador</a>
+      <button class="icon-btn" id="consultaPedidoNav" aria-label="Consultar mi pedido" title="¿Dónde está mi pedido?" hidden>
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8l-9-5-9 5v8l9 5 9-5z"/><polyline points="3 8 12 13 21 8"/><line x1="12" y1="13" x2="12" y2="22"/></svg>
+      </button>
+      <button class="icon-btn" id="openFavBtn" aria-label="Ver favoritos">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
+        <span class="cart-count" id="favCount">0</span>
+      </button>
+      <button class="icon-btn" id="openCartBtn" aria-label="Abrir carrito">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+      <button class="nav-toggle icon-btn" id="navToggle" aria-label="Abrir menú" aria-controls="mobileNav" aria-expanded="false">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+
+</header>
+
+<!-- ============ MENÚ MÓVIL (PANEL LATERAL DEL BOTÓN ☰) ============ -->
+<!-- Está FUERA del encabezado a propósito: así el panel se posiciona respecto a la pantalla
+     completa y no se mueve cuando el encabezado se oculta al bajar. -->
+<div class="mobile-nav-backdrop" id="mobileNavBackdrop"></div>
+<aside class="mobile-nav" id="mobileNav" role="dialog" aria-modal="true" aria-label="Menú de navegación">
+  <div class="mnav-head">
+    <div class="mnav-title">
+      <span class="mnav-title-main">Menú</span>
+      <span class="mnav-title-sub">Couture Byte Market</span>
+    </div>
+    <button type="button" class="mnav-close" id="closeMobileNavBtn" aria-label="Cerrar menú">
+      <span>Cerrar</span>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+
+  <div class="mnav-body">
+    <a href="#" class="mnav-link mnav-consulta" id="consultaPedidoMnav" hidden>
+      <span class="mnav-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 8l-9-5-9 5v8l9 5 9-5z"/><polyline points="3 8 12 13 21 8"/><line x1="12" y1="13" x2="12" y2="22"/></svg></span>
+      <span class="mnav-text">¿Dónde está mi pedido?</span>
+      <svg class="mnav-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+    </a>
+
+    <div class="search-box mobile-search-box">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" id="mobileSearchInput" placeholder="Buscar vestidos, blusas..." autocomplete="off">
+      <div class="search-suggestions" id="mobileSearchSuggestions"></div>
+    </div>
+
+    <div class="mnav-group">
+      <p class="mnav-group-title">Explora</p>
+      <nav class="mnav-links" aria-label="Explora la tienda">
+        <a href="#coleccion" class="mnav-link" style="--i:0">
+          <span class="mnav-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.9 4.6 4.6 1.9-4.6 1.9L12 16l-1.9-4.6L5.5 9.5l4.6-1.9z"/><path d="M19 15l.8 1.9 1.9.8-1.9.8-.8 1.9-.8-1.9-1.9-.8 1.9-.8z"/></svg></span>
+          <span class="mnav-text">Nueva colección</span>
+          <svg class="mnav-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+        <a href="#catalogo" class="mnav-link" style="--i:1">
+          <span class="mnav-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></span>
+          <span class="mnav-text">Catálogo</span>
+          <svg class="mnav-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+        <a href="#destacados" class="mnav-link" style="--i:2">
+          <span class="mnav-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span>
+          <span class="mnav-text">Destacados</span>
+          <svg class="mnav-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+      </nav>
+    </div>
+
+    <div class="mnav-group">
+      <p class="mnav-group-title">Encuéntranos</p>
+      <nav class="mnav-links" aria-label="Contacto y ubicación">
+        <a href="#ubicacion" class="mnav-link" style="--i:3">
+          <span class="mnav-ico mnav-ico-lilac"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+          <span class="mnav-text">Ubicación</span>
+          <svg class="mnav-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+        <a href="#contacto" class="mnav-link" style="--i:4">
+          <span class="mnav-ico mnav-ico-lilac"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></span>
+          <span class="mnav-text">Contacto</span>
+          <svg class="mnav-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+      </nav>
+    </div>
+  </div>
+
+  <div class="mnav-foot">
+    <a href="admin.html" class="mnav-admin" style="--i:5">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      <span>Administrador</span>
+    </a>
+    <p class="mnav-tagline">Moda femenina con carácter</p>
+  </div>
+</aside>
+
+
+<!-- ============ PORTADA ============ -->
+<section class="hero" id="inicio">
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <span class="eyebrow">Nueva temporada · Edición limitada</span>
+      <h1 class="hero-title">
+        <span class="ht-line ht-line-a">Encuentra tu</span>
+        <span class="ht-word">
+          <span class="ht-word-blob" aria-hidden="true"></span>
+          <span class="ht-word-text">look</span>
+        </span>
+        <span class="ht-line ht-line-b">vive tu estilo.</span>
+      </h1>
+      <p>Piezas femeninas pensadas para resaltar tu esencia: vestidos, blusas, pantalones y conjuntos con un toque delicado y moderno, hechos para quien no pasa desapercibida.</p>
+      <div class="hero-cta">
+        <a href="#catalogo" class="btn btn-primary">
+          Comenzar a comprar
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+        <a href="#coleccion" class="btn btn-outline">Ver colección</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><b data-count-live="prendas">–</b><span>Prendas disponibles</span></div>
+        <div class="hero-stat"><b data-count-live="categorias">–</b><span>Categorías curadas</span></div>
+        <div class="hero-stat"><b data-count-to="100" data-suffix="%">0</b><span>Pedido por WhatsApp</span></div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <svg class="hero-blob" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="blobGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#FBD9E7"/>
+            <stop offset="55%" stop-color="#E7DFFA"/>
+            <stop offset="100%" stop-color="#D3F5E6"/>
+          </linearGradient>
+        </defs>
+        <path fill="url(#blobGrad)" d="M420,300Q430,400,330,440Q230,480,150,410Q70,340,90,240Q110,140,210,90Q310,40,390,120Q470,200,420,300Z"/>
+      </svg>
+      <span class="hero-tag-float">Colección <span data-year>2026</span></span>
+      <div class="hero-image-wrap">
+        <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=900&q=80&auto=format&fit=crop"
+             onerror="if(window.handleImgError) handleImgError(this,'vestido')" alt="Modelo luciendo vestido pastel Couture Byte Market">
+      </div>
+      <div class="brand-seal" aria-hidden="true">
+        <svg class="brand-seal-svg" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+          <defs><path id="sealCircle" d="M60,60 m-46,0 a46,46 0 1,1 92,0 a46,46 0 1,1 -92,0"/></defs>
+          <circle cx="60" cy="60" r="58" fill="var(--surface)" opacity="0.94"/>
+          <text font-size="8.6" letter-spacing="2.4" fill="var(--rose-deep-dk)">
+            <textPath href="#sealCircle" startOffset="0%">NUEVA COLECCIÓN • HECHO CON AMOR • </textPath>
+          </text>
+        </svg>
+        <span class="brand-seal-center">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2c1 3 3 5 6 6-3 1-5 3-6 6-1-3-3-5-6-6 3-1 5-3 6-6z"/></svg>
+        </span>
+      </div>
+      <div class="hero-badge">
+        <span class="hero-badge-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </span>
+        <span>
+          <b>Hecho para ti</b>
+          <span>Piezas seleccionadas con amor</span>
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CINTA DE MARCA ============ -->
+<div class="brand-marquee" aria-hidden="true">
+  <div class="brand-marquee-track">
+    <span>Nueva colección <span data-year>2026</span></span><span class="dot">✦</span>
+    <span>Envíos a toda Bolivia</span><span class="dot">✦</span>
+    <span>Pago por QR, transferencia o efectivo</span><span class="dot">✦</span>
+    <span>Piezas seleccionadas con amor</span><span class="dot">✦</span>
+    <span>Stock real, sin sorpresas</span><span class="dot">✦</span>
+    <span>Nueva colección <span data-year>2026</span></span><span class="dot">✦</span>
+    <span>Envíos a toda Bolivia</span><span class="dot">✦</span>
+    <span>Pago por QR, transferencia o efectivo</span><span class="dot">✦</span>
+    <span>Piezas seleccionadas con amor</span><span class="dot">✦</span>
+    <span>Stock real, sin sorpresas</span><span class="dot">✦</span>
+  </div>
+</div>
+
+<!-- ============ CATEGORÍAS ============ -->
+<section class="section" id="coleccion">
+  <div class="container">
+    <div class="section-head reveal">
+      <div>
+        <span class="eyebrow">Descubre tu estilo</span>
+        <h2>Compra por categoría</h2>
+      </div>
+      <p>Encuentra justo lo que buscas, organizado por línea de ropa.</p>
+    </div>
+
+    <div class="cat-grid" id="categoryGrid">
+      <!-- Generado por JS: products.js → renderCategoryGrid() -->
+    </div>
+  </div>
+</section>
+
+<!-- ============ FRANJA PROMO ============ -->
+<section class="promo-strip">
+  <svg class="wave-divider wave-top" viewBox="0 0 1200 40" preserveAspectRatio="none" aria-hidden="true"><path class="wave-fill" d="M0,40 C300,0 900,0 1200,40 L1200,0 L0,0 Z"/></svg>
+  <div class="container promo-inner reveal">
+    <h3>Cada pieza cuenta una historia. La tuya empieza aquí.</h3>
+    <a href="#catalogo" class="btn btn-primary">Ver todo el catálogo</a>
+  </div>
+  <svg class="wave-divider wave-bottom" viewBox="0 0 1200 40" preserveAspectRatio="none" aria-hidden="true"><path class="wave-fill" d="M0,40 C300,0 900,0 1200,40 L1200,0 L0,0 Z"/></svg>
+</section>
+
+<!-- ============ DESTACADOS ============ -->
+<section class="section" id="destacados">
+  <div class="container">
+    <div class="section-head reveal">
+      <div>
+        <span class="eyebrow">Nuestra selección</span>
+        <h2>Colección destacada</h2>
+      </div>
+      <p>Las piezas favoritas de nuestras clientas esta temporada.</p>
+    </div>
+    <div class="product-grid" id="featuredGrid">
+      <!-- Generado por JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ============ CATÁLOGO COMPLETO ============ -->
+<section class="section section-alt" id="catalogo">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Encuentra tu look</span>
+        <h2>Catálogo completo</h2>
+      </div>
+      <p>Filtra por categoría, talla o precio hasta dar con la pieza perfecta.</p>
+    </div>
+
+    <div class="catalog-toolbar">
+      <div class="filter-pills" id="categoryFilters">
+        <button class="pill active" data-cat="todas">Todas</button>
+        <button class="pill" data-cat="vestidos">Vestidos</button>
+        <button class="pill" data-cat="blusas">Blusas</button>
+        <button class="pill" data-cat="pantalones">Pantalones</button>
+        <button class="pill" data-cat="conjuntos">Conjuntos</button>
+      </div>
+      <div class="toolbar-right">
+        <select class="select-elegant" id="tallaFilter">
+          <option value="todas">Todas las tallas</option>
+          <option value="XS">XS</option>
+          <option value="S">S</option>
+          <option value="M">M</option>
+          <option value="L">L</option>
+          <option value="XL">XL</option>
+        </select>
+        <select class="select-elegant" id="ordenarSelect">
+          <option value="recientes">Más recientes</option>
+          <option value="precio-asc">Precio: menor a mayor</option>
+          <option value="precio-desc">Precio: mayor a menor</option>
+          <option value="nombre">Nombre A-Z</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="product-grid" id="catalogGrid">
+      <!-- Generado por JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ============ NUESTRA HISTORIA + VALORES ============ -->
+<section class="section">
+  <div class="container">
+    <div class="story-block reveal">
+      <span class="eyebrow">Sobre nosotros</span>
+      <h2>Vestir con intención, no por casualidad</h2>
+      <p>Couture Byte Market nació de una idea simple: la moda femenina no tiene que elegir entre ser cómoda y ser elegante. Seleccionamos cada vestido, blusa, pantalón y conjunto pensando en mujeres reales, con días reales — y con la certeza de que lo que ves en pantalla es exactamente lo que vas a recibir.</p>
+    </div>
+    <div class="values-grid">
+      <div class="value-card reveal" style="--reveal-delay:.05s">
+        <span class="value-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></span>
+        <h4>Diseño con esencia</h4>
+        <p>Cada prenda es elegida pensando en tu personalidad y comodidad.</p>
+      </div>
+      <div class="value-card reveal" style="--reveal-delay:.14s">
+        <span class="value-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></span>
+        <h4>Stock real y verificado</h4>
+        <p>Lo que ves disponible, existe. Sin sorpresas al momento de comprar.</p>
+      </div>
+      <div class="value-card reveal" style="--reveal-delay:.23s">
+        <span class="value-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></span>
+        <h4>Compra por WhatsApp</h4>
+        <p>Finaliza tu pedido en segundos, sin registros complicados.</p>
+      </div>
+      <div class="value-card reveal" style="--reveal-delay:.32s">
+        <span class="value-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></span>
+        <h4>Precios claros en Bs.</h4>
+        <p>Sin costos escondidos. Ves el total antes de confirmar.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ UBICACIÓN ============ -->
+<section class="section section-alt" id="ubicacion">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Zona de entrega</span>
+        <h2>Dónde estamos</h2>
+      </div>
+    </div>
+    <div class="location-wrap">
+      <div class="location-info reveal">
+        <h3>Couture Byte Market</h3>
+        <p>Vendemos por WhatsApp y coordinamos la entrega de cada pedido. Esta es nuestra zona de referencia.</p>
+        <div class="location-list">
+          <div class="location-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span><b>Zona de referencia</b><span id="direccionTexto">Calle Beni, UV-4, Satélite Norte, Warnes, Santa Cruz, Bolivia</span></span>
+          </div>
+          <div class="location-item" id="horarioItem" hidden>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <span><b>Horario de atención</b><span id="horarioTexto" style="white-space:pre-line;"></span></span>
+          </div>
+          <div class="location-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <span><b>WhatsApp</b><span id="footerWaText">+591 78411020</span></span>
+          </div>
+        </div>
+        <a id="waLocationLink" href="#" target="_blank" class="btn btn-primary" style="align-self:flex-start; margin-top:8px;">Escribir por WhatsApp</a>
+      </div>
+      <iframe class="map-frame reveal" id="mapFrame" style="--reveal-delay:.12s" loading="lazy"
+        src="https://www.google.com/maps?q=Calle+Beni+UV-4+Satelite+Norte+Warnes+Santa+Cruz+Bolivia&output=embed">
+      </iframe>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PIE DE PÁGINA ============ -->
+<footer class="site-footer" id="contacto">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#inicio" class="brand">
+          <svg class="brand-mark" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="markGradMobile" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="var(--rose-deep)"/>
+                <stop offset="52%" stop-color="var(--gold)"/>
+                <stop offset="100%" stop-color="var(--lilac-deep)"/>
+              </linearGradient>
+            </defs>
+            <circle cx="30" cy="32" r="25" fill="url(#markGradMobile)"/>
+            <circle cx="30" cy="32" r="25" fill="none" stroke="#fff" stroke-width="1" opacity="0.5"/>
+            <ellipse cx="22" cy="20" rx="10" ry="6" fill="#fff" opacity="0.22" transform="rotate(-25 22 20)"/>
+            <text x="30" y="41" text-anchor="middle" font-family="var(--font-display)" font-style="italic" font-weight="600" font-size="23" letter-spacing="-1" fill="#fff">CB</text>
+            <g class="mark-bow" transform="translate(30,6) scale(0.62)">
+              <path d="M-1,1 C-4,-7 -15,-8 -16,0 C-17,8 -6,8 -1,1 Z" fill="var(--gold)"/>
+              <path d="M1,1 C4,-7 15,-8 16,0 C17,8 6,8 1,1 Z" fill="var(--gold)"/>
+              <path d="M-1,1 C-3,-4 -10,-5 -11,0 C-12,5 -5,5 -1,1 Z" fill="#fff" opacity="0.3"/>
+              <path d="M1,1 C3,-4 10,-5 11,0 C12,5 5,5 1,1 Z" fill="#fff" opacity="0.3"/>
+              <circle cx="0" cy="1" r="2.8" fill="var(--gold)"/>
+            </g>
+            <g class="mark-sparkle">
+              <path d="M46,15 L47.4,18.6 L51,20 L47.4,21.4 L46,25 L44.6,21.4 L41,20 L44.6,18.6 Z" fill="#fff"/>
+              <circle class="mark-sparkle-dot" cx="16" cy="46" r="1.8" fill="#fff"/>
+            </g>
+          </svg>
+          <span class="brand-name">Couture Byte Market</span>
+        </a>
+        <p>Moda femenina con personalidad. Vestidos, blusas, pantalones y conjuntos para cada versión de ti.</p>
+        <p style="font-family:var(--font-display); font-style:italic; color:var(--rose-deep-dk); font-size:15px; margin-top:-6px;">El estilo no se sigue, se elige.</p>
+        <div class="social-row">
+          <a href="https://wa.me/59178411020" target="_blank" class="social-icon" aria-label="WhatsApp" id="footerWaIcon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.85.5 3.58 1.36 5.06L2 22l5.2-1.36a9.9 9.9 0 0 0 4.84 1.24h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2z"/></svg>
+          </a>
+          <a href="https://instagram.com/couturebite" target="_blank" class="social-icon" aria-label="Instagram" id="footerIgIcon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="https://facebook.com/couturebite" target="_blank" class="social-icon" aria-label="Facebook" id="footerFbIcon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5>Tienda</h5>
+        <ul>
+          <li><a href="#catalogo">Catálogo</a></li>
+          <li><a href="#destacados">Destacados</a></li>
+          <li><a href="#coleccion">Categorías</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Ayuda</h5>
+        <ul>
+          <li><a href="#ubicacion">Ubicación</a></li>
+          <li><a href="https://wa.me/59178411020" target="_blank" id="footerContactLink">Contáctanos</a></li>
+          <li id="consultaPedidoLi" hidden><button type="button" class="footer-link-btn" id="consultaPedidoBtn">Consultar mi pedido</button></li>
+          <li><a href="admin.html">Administrador</a></li>
+          <li><button type="button" class="footer-link-btn" id="shareStoreBtn">Compartir tienda (QR)</button></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Zona de entrega</h5>
+        <ul id="footerDireccion">
+          <li><span>Calle Beni, UV-4</span></li>
+          <li><span>Satélite Norte, Warnes</span></li>
+          <li><span>Santa Cruz, Bolivia</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span data-year>2026</span> Couture Byte Market. Todos los derechos reservados.</span>
+      <span>Hecho con cariño para quienes visten su propio estilo.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ WHATSAPP FLOTANTE ============ -->
+<div class="whatsapp-float-wrap">
+  <span class="whatsapp-float-label">¿Tienes dudas? Escríbenos</span>
+  <a href="https://wa.me/59178411020?text=Hola%2C%20quisiera%20más%20información%20sobre%20Couture%20Bite" target="_blank" class="whatsapp-float" id="floatWaBtn" aria-label="Escríbenos por WhatsApp">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.85.5 3.58 1.36 5.06L2 22l5.2-1.36a9.9 9.9 0 0 0 4.84 1.24h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm5.8 14.11c-.24.68-1.4 1.3-1.93 1.35-.5.05-1.03.24-3.5-.73-2.96-1.18-4.86-4.2-5-4.4-.15-.19-1.2-1.6-1.2-3.05 0-1.46.77-2.17 1.04-2.47.27-.3.6-.37.8-.37.2 0 .4 0 .58.01.19.01.44-.07.68.53.25.6.85 2.07.92 2.22.07.15.12.33.02.53-.1.2-.15.32-.3.5-.15.17-.3.38-.44.51-.15.15-.3.3-.13.6.17.3.75 1.25 1.62 2.02 1.12 1 2.06 1.31 2.36 1.46.3.15.47.13.65-.08.18-.2.75-.87.95-1.17.2-.3.4-.25.68-.15.27.1 1.75.83 2.05.98.3.15.5.22.57.35.08.13.08.72-.16 1.4z"/></svg>
+    <span class="wa-dot"></span>
+  </a>
+</div>
+
+<!-- ============ CARRITO (PANEL LATERAL) ============ -->
+<div class="overlay" id="overlay"></div>
+<aside class="cart-drawer" id="cartDrawer">
+  <div class="cart-header">
+    <h3>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+      Tu bolsa
+    </h3>
+    <button class="cart-close" id="closeCartBtn" aria-label="Cerrar carrito">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <div class="cart-items" id="cartItemsWrap">
+    <!-- Generado por cart.js -->
+  </div>
+  <div class="cart-footer" id="cartFooter">
+    <div class="cart-total-row">
+      <span>Total</span>
+      <b id="cartTotal">Bs. 0</b>
+    </div>
+    <button class="btn btn-whatsapp btn-block" id="checkoutBtn">
+      Finalizar pedido por WhatsApp
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.85.5 3.58 1.36 5.06L2 22l5.2-1.36a9.9 9.9 0 0 0 4.84 1.24h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2z"/></svg>
+    </button>
+  </div>
+</aside>
+
+<!-- ============ FAVORITOS (PANEL LATERAL) ============ -->
+<div class="overlay" id="favOverlay"></div>
+<aside class="cart-drawer" id="favDrawer">
+  <div class="cart-header">
+    <h3>
+      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
+      Mis favoritos
+    </h3>
+    <button class="cart-close" id="closeFavBtn" aria-label="Cerrar favoritos">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <div class="cart-items" id="favItemsWrap">
+    <!-- Generado por favorites.js -->
+  </div>
+</aside>
+
+<!-- ============ VENTANA EMERGENTE: GUÍA DE TALLAS ============ -->
+<div class="modal-overlay" id="sizeGuideModal">
+  <div class="modal-box" style="max-width:480px;">
+    <h3>Guía de tallas</h3>
+    <p class="modal-sub">Medidas de referencia en centímetros. Pueden variar levemente según el modelo de cada prenda.</p>
+    <table class="size-guide-table">
+      <thead>
+        <tr><th>Talla</th><th>Busto</th><th>Cintura</th><th>Cadera</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>XS</td><td>78–82</td><td>60–64</td><td>86–90</td></tr>
+        <tr><td>S</td><td>83–87</td><td>65–69</td><td>91–95</td></tr>
+        <tr><td>M</td><td>88–93</td><td>70–75</td><td>96–101</td></tr>
+        <tr><td>L</td><td>94–99</td><td>76–81</td><td>102–107</td></tr>
+        <tr><td>XL</td><td>100–106</td><td>82–88</td><td>108–114</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:12.5px; color:var(--text-faint); margin-top:14px;">
+      ¿Tienes dudas sobre cuál elegir? Escríbenos por WhatsApp y te ayudamos a encontrar tu talla ideal.
+    </p>
+    <button type="button" class="btn btn-primary btn-block" style="margin-top:10px;" onclick="closeModal('sizeGuideModal')">Entendido</button>
+  </div>
+</div>
+
+<!-- ============ VENTANA EMERGENTE: COMPARTIR (producto o tienda) ============ -->
+<div class="modal-overlay" id="shareModal">
+  <div class="modal-box" style="max-width:380px; text-align:center;">
+    <h3 id="shareModalTitle">Compartir</h3>
+    <p class="modal-sub" id="shareModalSub">Comparte este enlace o el código QR.</p>
+    <img id="shareQrImg" src="" alt="Código QR" style="width:180px; height:180px; margin:0 auto 16px; display:block; border-radius:14px; border:1px solid var(--champagne);">
+    <div class="share-link-box">
+      <input type="text" id="shareLinkInput" readonly>
+      <button type="button" onclick="copyShareLink()" title="Copiar enlace">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      </button>
+    </div>
+    <button type="button" class="btn btn-primary btn-block" style="margin-top:14px;" onclick="shareViaWhatsApp()">
+      Compartir por WhatsApp
+    </button>
+    <button type="button" class="btn btn-ghost btn-block" style="margin-top:10px;" onclick="closeModal('shareModal')">Cerrar</button>
+  </div>
+</div>
+
+<!-- ============ VENTANA EMERGENTE: DEJAR UNA RESEÑA ============ -->
+<div class="modal-overlay" id="resenaFormModal">
+  <div class="modal-box" style="max-width:400px; position:relative;">
+    <button type="button" class="product-modal-close" onclick="closeModal('resenaFormModal')" aria-label="Cerrar">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <h3>Dejar mi reseña</h3>
+    <p class="modal-sub">Sobre: <b id="resenaProductoNombre"></b></p>
+    <form id="resenaForm" autocomplete="off">
+      <input type="hidden" id="resenaProductoId">
+      <div class="form-group">
+        <label>Tu calificación</label>
+        <div id="resenaEstrellasInput" style="font-size:28px; color:var(--rose-deep-dk); letter-spacing:6px; margin:4px 0 6px; cursor:pointer;">
+          <span class="estrella-input" data-valor="1" onclick="seleccionarEstrella(1)">☆</span><span class="estrella-input" data-valor="2" onclick="seleccionarEstrella(2)">☆</span><span class="estrella-input" data-valor="3" onclick="seleccionarEstrella(3)">☆</span><span class="estrella-input" data-valor="4" onclick="seleccionarEstrella(4)">☆</span><span class="estrella-input" data-valor="5" onclick="seleccionarEstrella(5)">☆</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="resenaNombre">Tu nombre</label>
+        <input type="text" id="resenaNombre" autocomplete="off" placeholder="¿Cómo quieres que aparezca tu nombre?" required>
+      </div>
+      <div class="form-group">
+        <label for="resenaComentario">Tu comentario</label>
+        <textarea id="resenaComentario" rows="3" placeholder="Cuéntanos qué te pareció..." required></textarea>
+      </div>
+      <p style="font-size:11.5px; color:var(--text-faint); margin-bottom:14px;">Tu reseña se publica después de que la revisemos, para mantener la tienda libre de spam.</p>
+      <div style="display:flex; gap:10px;">
+        <button type="button" class="btn btn-ghost" style="flex:1;" onclick="closeModal('resenaFormModal')">Cancelar</button>
+        <button type="submit" class="btn btn-primary" style="flex:1;" id="resenaSubmitBtn">Enviar reseña</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ============ VENTANA EMERGENTE: DETALLE DE PRODUCTO ============ -->
+<div class="modal-overlay product-modal" id="productModal">
+  <div class="modal-box" style="position:relative;">
+    <button class="product-modal-close" id="closeProductModal">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div class="product-modal-grid" id="productModalContent">
+      <!-- Generado por products.js -->
+    </div>
+  </div>
+</div>
+
+<!-- ============ IMAGEN AMPLIADA ============ -->
+<div class="lightbox-overlay" id="lightboxOverlay">
+  <button class="lightbox-close" id="lightboxClose" aria-label="Cerrar imagen ampliada">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </button>
+  <img id="lightboxImg" src="" alt="">
+</div>
+
+<!-- ============ VENTANA EMERGENTE: DATOS DEL CLIENTE / FINALIZAR COMPRA ============ -->
+<div class="modal-overlay" id="checkoutModal">
+  <div class="modal-box">
+    <h3>Finalizar tu pedido</h3>
+    <p class="modal-sub">Solo necesitamos estos datos para coordinar tu pedido por WhatsApp.</p>
+
+    <div class="order-summary-box" id="checkoutSummary"></div>
+    <div class="cart-total-row" style="margin-bottom:14px;">
+      <span>Total a pagar</span>
+      <b id="checkoutTotal">Bs. 0</b>
+    </div>
+
+    <div class="delivery-info-box" id="deliveryInfoBox"></div>
+    <div class="payment-methods-box" id="paymentMethodsBox" style="display:none;"></div>
+
+    <form id="checkoutForm" autocomplete="off" style="margin-top:18px;">
+      <div class="form-group">
+        <label for="clienteNombre">Nombre completo</label>
+        <input type="text" id="clienteNombre" autocomplete="off" required placeholder="Ej. María López">
+        <span class="form-error" id="errNombre">Por favor ingresa tu nombre completo.</span>
+      </div>
+      <div class="form-group">
+        <label for="clienteTelefono">Teléfono</label>
+        <input type="tel" id="clienteTelefono" autocomplete="off" required placeholder="Ej. 78400000">
+        <span class="form-error" id="errTelefono">Ingresa un teléfono válido.</span>
+      </div>
+      <div class="form-group">
+        <label for="clienteEmail">Correo electrónico</label>
+        <input type="email" id="clienteEmail" autocomplete="off" required placeholder="Ej. maria@correo.com">
+        <span class="form-error" id="errEmail">Ingresa un correo electrónico válido.</span>
+      </div>
+      <button type="submit" class="btn btn-whatsapp btn-block" id="confirmOrderBtn">
+        Confirmar y continuar a WhatsApp
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.85.5 3.58 1.36 5.06L2 22l5.2-1.36a9.9 9.9 0 0 0 4.84 1.24h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2z"/></svg>
+      </button>
+    </form>
+  </div>
+</div>
+
+<!-- ============ VENTANA EMERGENTE: CONSULTAR MI PEDIDO (solo si se activa en Configuración) ============ -->
+<div class="modal-overlay" id="consultaModal">
+  <div class="modal-box">
+    <h3>Consultar mi pedido</h3>
+    <p class="modal-sub">Escribe el teléfono y el correo que usaste al comprar. Los dos deben coincidir.</p>
+    <form id="consultaForm" autocomplete="off">
+      <div class="form-group">
+        <label for="consultaTelefono">Teléfono</label>
+        <input type="tel" id="consultaTelefono" autocomplete="off" required placeholder="Ej. 78400000">
+      </div>
+      <div class="form-group">
+        <label for="consultaEmail">Correo electrónico</label>
+        <input type="email" id="consultaEmail" autocomplete="off" required placeholder="Ej. maria@correo.com">
+      </div>
+      <button type="submit" class="btn btn-primary btn-block" id="consultaBtn">Ver mis pedidos</button>
+    </form>
+    <div id="consultaResultado" style="margin-top:18px;"></div>
+    <button type="button" class="btn btn-ghost btn-block" style="margin-top:12px;" onclick="closeModal('consultaModal')">Cerrar</button>
+  </div>
+</div>
+
+<div class="toast-wrap" id="toastWrap"></div>
+
+<!-- ============ SUPABASE + APLICACIÓN ============ -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/config.js"></script>
+<script src="js/supabaseClient.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/motion.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/favorites.js"></script>
+<script src="js/share.js"></script>
+<script src="js/resenas.js"></script>
+<script src="js/products.js"></script>
+<script src="js/opciones.js"></script>
+<script src="js/checkout.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

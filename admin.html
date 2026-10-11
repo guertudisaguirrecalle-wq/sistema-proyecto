@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Panel de Administrador — Couture Byte Market</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/admin.css">
+</head>
+<body class="admin-body">
+
+<!-- ============ LOGIN ============ -->
+<div class="admin-login-screen" id="loginScreen">
+  <div class="login-card">
+    <svg class="brand-mark" style="display:flex;" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="markGradLogin" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="var(--rose-deep)"/>
+          <stop offset="52%" stop-color="var(--gold)"/>
+          <stop offset="100%" stop-color="var(--lilac-deep)"/>
+        </linearGradient>
+      </defs>
+      <circle cx="30" cy="32" r="25" fill="url(#markGradLogin)"/>
+      <circle cx="30" cy="32" r="25" fill="none" stroke="#fff" stroke-width="1" opacity="0.5"/>
+      <ellipse cx="22" cy="20" rx="10" ry="6" fill="#fff" opacity="0.22" transform="rotate(-25 22 20)"/>
+      <text x="30" y="41" text-anchor="middle" font-family="var(--font-display)" font-style="italic" font-weight="600" font-size="23" letter-spacing="-1" fill="#fff">CB</text>
+      <g class="mark-bow" transform="translate(30,6) scale(0.62)">
+        <path d="M-1,1 C-4,-7 -15,-8 -16,0 C-17,8 -6,8 -1,1 Z" fill="var(--gold)"/>
+        <path d="M1,1 C4,-7 15,-8 16,0 C17,8 6,8 1,1 Z" fill="var(--gold)"/>
+        <path d="M-1,1 C-3,-4 -10,-5 -11,0 C-12,5 -5,5 -1,1 Z" fill="#fff" opacity="0.3"/>
+        <path d="M1,1 C3,-4 10,-5 11,0 C12,5 5,5 1,1 Z" fill="#fff" opacity="0.3"/>
+        <circle cx="0" cy="1" r="2.8" fill="var(--gold)"/>
+      </g>
+      <g class="mark-sparkle">
+        <path d="M46,15 L47.4,18.6 L51,20 L47.4,21.4 L46,25 L44.6,21.4 L41,20 L44.6,18.6 Z" fill="#fff"/>
+        <circle class="mark-sparkle-dot" cx="16" cy="46" r="1.8" fill="#fff"/>
+      </g>
+    </svg>
+    <h1>Panel de Administrador</h1>
+    <p>Ingresa con tu cuenta para gestionar Couture Byte Market.</p>
+    <form id="loginForm">
+      <div class="form-group">
+        <label for="loginEmail">Correo electrónico</label>
+        <input type="email" id="loginEmail" required placeholder="tucorreo@gmail.com">
+      </div>
+      <div class="form-group">
+        <label for="loginPassword">Contraseña</label>
+        <input type="password" id="loginPassword" required placeholder="••••••••">
+      </div>
+      <span class="form-error" id="loginError">Correo o contraseña incorrectos.</span>
+      <button type="submit" class="btn btn-primary btn-block" id="loginBtn" style="margin-top:10px;">Ingresar</button>
+    </form>
+    <a href="index.html" class="login-back">← Volver a la tienda</a>
+  </div>
+</div>
+
+<!-- ============ PANEL ============ -->
+<div class="admin-shell" id="adminShell" style="display:none;">
+  <aside class="admin-sidebar">
+    <a href="index.html" class="brand">
+      <svg class="brand-mark" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="markGradSidebar" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="var(--rose-deep)"/>
+            <stop offset="52%" stop-color="var(--gold)"/>
+            <stop offset="100%" stop-color="var(--lilac-deep)"/>
+          </linearGradient>
+        </defs>
+        <circle cx="30" cy="32" r="25" fill="url(#markGradSidebar)"/>
+        <circle cx="30" cy="32" r="25" fill="none" stroke="#fff" stroke-width="1" opacity="0.5"/>
+        <ellipse cx="22" cy="20" rx="10" ry="6" fill="#fff" opacity="0.22" transform="rotate(-25 22 20)"/>
+        <text x="30" y="41" text-anchor="middle" font-family="var(--font-display)" font-style="italic" font-weight="600" font-size="23" letter-spacing="-1" fill="#fff">CB</text>
+        <g class="mark-bow" transform="translate(30,6) scale(0.62)">
+          <path d="M-1,1 C-4,-7 -15,-8 -16,0 C-17,8 -6,8 -1,1 Z" fill="var(--gold)"/>
+          <path d="M1,1 C4,-7 15,-8 16,0 C17,8 6,8 1,1 Z" fill="var(--gold)"/>
+          <path d="M-1,1 C-3,-4 -10,-5 -11,0 C-12,5 -5,5 -1,1 Z" fill="#fff" opacity="0.3"/>
+          <path d="M1,1 C3,-4 10,-5 11,0 C12,5 5,5 1,1 Z" fill="#fff" opacity="0.3"/>
+          <circle cx="0" cy="1" r="2.8" fill="var(--gold)"/>
+        </g>
+        <g class="mark-sparkle">
+          <path d="M46,15 L47.4,18.6 L51,20 L47.4,21.4 L46,25 L44.6,21.4 L41,20 L44.6,18.6 Z" fill="#fff"/>
+          <circle class="mark-sparkle-dot" cx="16" cy="46" r="1.8" fill="#fff"/>
+        </g>
+      </svg>
+      <span>
+        <span class="brand-name">Couture Byte Market</span>
+        <span class="brand-tag">Panel admin</span>
+      </span>
+    </a>
+    <nav class="admin-nav">
+      <button class="admin-nav-item active" data-view="viewStats">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        Estadísticas
+      </button>
+      <button class="admin-nav-item" data-view="viewProductos">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+        Productos
+      </button>
+      <button class="admin-nav-item" data-view="viewPedidos">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        Pedidos
+        <span class="nav-badges">
+          <span class="nav-badge nav-badge-rec" id="pedidosRecurrentesBadge" style="display:none;">↻ 0</span>
+          <span class="nav-badge" id="pedidosNuevosBadge" style="display:none;">0</span>
+        </span>
+      </button>
+      <button class="admin-nav-item" data-view="viewClientes">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Clientes
+      </button>
+      <button class="admin-nav-item" data-view="viewResenas">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.63 22 9.24 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.24 8.91 8.63 12 2"/></svg>
+        Reseñas
+        <span class="nav-badge" id="resenasPendientesBadge" style="display:none;">0</span>
+      </button>
+      <button class="admin-nav-item" data-view="viewConfig">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        Configuración
+      </button>
+    </nav>
+    <div class="admin-nav-footer">
+      <div class="admin-user-chip" id="adminUserChip">—</div>
+      <button class="admin-nav-item" id="logoutBtn">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        Cerrar sesión
+      </button>
+    </div>
+  </aside>
+
+  <main class="admin-main">
+
+    <!-- ---------- VISTA: ESTADÍSTICAS ---------- -->
+    <section class="admin-view active" id="viewStats">
+      <div class="admin-topbar">
+        <div>
+          <h1>Estadísticas</h1>
+          <p>Un resumen real de cómo va tu tienda, calculado con tus pedidos ya registrados.</p>
+        </div>
+        <select class="select-elegant" id="statsRangeSelect" style="width:170px;">
+          <option value="1">Hoy</option>
+          <option value="7">Últimos 7 días</option>
+          <option value="30" selected>Últimos 30 días</option>
+          <option value="90">Últimos 90 días</option>
+        </select>
+      </div>
+
+      <div class="stats-row" id="statsSummaryRow"></div>
+
+      <!-- Alerta inteligente: cruza "qué se vende más" con "qué queda en stock".
+           Avisa primero sobre lo que de verdad urge reponer: los productos que
+           MÁS se venden, no cualquier producto con poco stock. -->
+      <div id="alertaProductoEstrella" style="display:none; margin-bottom:20px;"></div>
+
+      <!-- Comparación con el período anterior + clientas nuevas vs recurrentes -->
+      <div class="stats-row" id="statsComparativaRow" style="margin-bottom:20px;"></div>
+
+      <div class="stats-grid">
+        <div class="admin-panel chart-panel">
+          <h3 id="chartVentasTitulo">Ventas por día</h3>
+          <p class="modal-sub" id="chartVentasSub">Total vendido (Bs.) cada día, sin contar pedidos cancelados.</p>
+          <div class="chart-wrap"><canvas id="chartVentasDia"></canvas></div>
+        </div>
+
+        <div class="admin-panel chart-panel">
+          <h3>Ventas por categoría</h3>
+          <p class="modal-sub">Qué tipo de prenda genera más ingresos.</p>
+          <div class="chart-wrap chart-wrap-small"><canvas id="chartCategorias"></canvas></div>
+        </div>
+
+        <div class="admin-panel chart-panel">
+          <h3>Mejor día para vender</h3>
+          <p class="modal-sub">Promedio vendido (Bs.) en cada día de la semana durante el período, para saber cuándo publicar promociones.</p>
+          <div class="chart-wrap chart-wrap-small"><canvas id="chartMejorDia"></canvas></div>
+        </div>
+
+        <div class="admin-panel chart-panel chart-panel-wide">
+          <div class="chart-panel-head">
+            <div>
+              <h3>Productos más vendidos</h3>
+              <p class="modal-sub">Ranking por unidades vendidas, con su stock actual al lado.</p>
+            </div>
+            <div class="export-actions">
+              <button type="button" class="btn btn-ghost" id="exportVentasBtn" style="padding:8px 14px; font-size:12px; white-space:nowrap;">Exportar ventas (Excel)</button>
+              <button type="button" class="btn btn-ghost" id="exportVentasPdfBtn" style="padding:8px 14px; font-size:12px; white-space:nowrap;">Exportar ventas (PDF)</button>
+            </div>
+          </div>
+          <div id="topProductosRanking" class="top-products-ranking"></div>
+          <div class="admin-table-wrap" style="margin-top:18px;">
+            <table class="admin-table" id="topProductosTabla">
+              <thead>
+                <tr><th>#</th><th>Producto</th><th>Unidades vendidas</th><th>Ingresos generados</th><th>Stock actual</th></tr>
+              </thead>
+              <tbody id="topProductosTablaBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="admin-panel chart-panel chart-panel-wide">
+          <div>
+            <h3 style="margin-bottom:2px;">Stock muerto</h3>
+            <p class="modal-sub" style="margin:0;">Productos activos con stock disponible que no vendieron ni una unidad en este período. Candidatos a dejar de reponer o poner en oferta. No se cuentan los productos publicados dentro del período, porque aún no tuvieron tiempo de venderse.</p>
+          </div>
+          <div class="admin-table-wrap" style="margin-top:14px;">
+            <table class="admin-table" id="stockMuertoTabla">
+              <thead>
+                <tr><th>Producto</th><th>Categoría</th><th>Stock actual</th><th>Precio</th></tr>
+              </thead>
+              <tbody id="stockMuertoTablaBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="admin-panel" style="margin-top:24px;">
+        <div class="admin-panel-head">
+          <h3>Reporte de stock bajo <span class="badge badge-warn" id="stockBajoCount">0</span></h3>
+          <div class="export-actions">
+            <button type="button" class="btn btn-ghost" id="exportStockBajoBtn" style="padding:8px 16px; font-size:12.5px;">Exportar Excel</button>
+            <button type="button" class="btn btn-ghost" id="exportStockBajoPdfBtn" style="padding:8px 16px; font-size:12.5px;">Exportar PDF</button>
+          </div>
+        </div>
+        <p class="modal-sub" style="padding:0 24px;">Tallas con 3 unidades o menos (y agotadas), para que sepas qué reponer.</p>
+        <div class="admin-table-wrap">
+          <table class="admin-table">
+            <thead><tr><th>Producto</th><th>Categoría</th><th>Talla</th><th>Stock</th></tr></thead>
+            <tbody id="stockBajoTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- VISTA: PRODUCTOS ---------- -->
+    <section class="admin-view" id="viewProductos">
+      <div class="admin-topbar">
+        <div>
+          <h1>Productos</h1>
+          <p>Agrega, edita y controla el stock por talla de cada prenda.</p>
+        </div>
+        <button class="btn btn-primary" id="openAddProductBtn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Agregar producto
+        </button>
+      </div>
+
+      <div class="stats-row" id="productStats"></div>
+
+      <div class="admin-panel">
+        <div class="admin-panel-head">
+          <h3>Catálogo</h3>
+          <input type="text" class="select-elegant" id="adminProductSearch" placeholder="Buscar producto..." style="width:220px;">
+        </div>
+        <div class="admin-category-filters" id="adminCategoryFilters">
+          <button class="pill active" data-cat="todas">Todas</button>
+        </div>
+        <div class="admin-products-grid" id="productsGrid">
+          <p class="empty-admin">Cargando productos...</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- VISTA: PEDIDOS ---------- -->
+    <section class="admin-view" id="viewPedidos">
+      <div class="admin-topbar">
+        <div>
+          <h1>Pedidos</h1>
+          <p>Historial de pedidos registrados desde la tienda.</p>
+        </div>
+      </div>
+      <div class="stats-row" id="orderStats"></div>
+      <div class="admin-panel">
+        <div class="admin-panel-head">
+          <h3>Historial de pedidos</h3>
+          <input type="text" class="select-elegant" id="orderSearch" placeholder="Buscar por nombre, teléfono o correo..." style="width:280px;">
+        </div>
+        <div class="admin-category-filters" id="orderStateFilters"></div>
+        <div class="admin-table-wrap">
+          <table class="admin-table">
+            <thead>
+              <tr><th>Fecha</th><th>Cliente</th><th>Teléfono</th><th>Productos</th><th>Total</th><th>Estado</th></tr>
+            </thead>
+            <tbody id="ordersTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- VISTA: CLIENTES ---------- -->
+    <section class="admin-view" id="viewClientes">
+      <div class="admin-topbar">
+        <div>
+          <h1>Clientes</h1>
+          <p>Personas que han registrado pedidos en Couture Byte Market.</p>
+        </div>
+      </div>
+      <div class="admin-panel">
+        <div class="admin-panel-head"><h3>Listado de clientes</h3></div>
+        <div class="admin-table-wrap">
+          <table class="admin-table">
+            <thead><tr><th>Nombre</th><th>Teléfono</th><th>Correo</th><th>Pedidos realizados</th><th>Cliente desde</th><th>Última compra</th></tr></thead>
+            <tbody id="customersTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- VISTA: RESEÑAS ---------- -->
+    <section class="admin-view" id="viewResenas">
+      <div class="admin-topbar">
+        <div>
+          <h1>Reseñas</h1>
+          <p>Modera las reseñas que dejan las clientas antes de que se publiquen en la tienda.</p>
+        </div>
+      </div>
+      <div class="stats-row" id="resenasStats"></div>
+      <div class="admin-panel">
+        <div class="admin-panel-head"><h3>Pendientes de aprobar</h3></div>
+        <div class="resenas-admin-list" id="resenasPendientesList"></div>
+      </div>
+      <div class="admin-panel" style="margin-top:20px;">
+        <div class="admin-panel-head"><h3>Ya aprobadas</h3></div>
+        <div class="resenas-admin-list" id="resenasAprobadasList"></div>
+      </div>
+    </section>
+
+    <!-- ---------- VISTA: CONFIGURACIÓN ---------- -->
+    <section class="admin-view" id="viewConfig">
+      <div class="admin-topbar">
+        <div>
+          <h1>Configuración</h1>
+          <p>Datos de envío y métodos de pago que ve la clienta al finalizar su pedido. Se guardan al instante, sin tocar código.</p>
+        </div>
+      </div>
+
+      <div class="admin-panel" style="padding:24px; margin-bottom:20px;">
+        <h3 style="margin-bottom:4px;">Foto de portada</h3>
+        <p class="form-hint" style="margin-bottom:14px;">La foto grande que se ve al entrar a la tienda. Funciona mejor una foto vertical (ej. 4:5) de buena calidad.</p>
+        <div class="form-group">
+          <div id="cfgPortadaPreviewWrap" style="display:none;">
+            <div class="upload-preview"><img id="cfgPortadaPreviewImg" src="" alt="Vista previa de la portada"></div>
+          </div>
+          <div class="upload-zone" id="cfgPortadaUploadZone">
+            <input type="file" id="cfgPortadaInput" accept="image/png, image/jpeg, image/webp">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            <p><b>Toca aquí para subir la foto de portada</b><br>desde tu computadora o celular</p>
+          </div>
+          <div class="upload-progress" id="cfgPortadaUploadProgress"><div class="upload-progress-bar" id="cfgPortadaUploadProgressBar"></div></div>
+          <button type="button" class="btn btn-ghost" id="cfgPortadaQuitarBtn" style="display:none; margin-top:10px; padding:8px 14px; font-size:12.5px;">Volver a la foto por defecto</button>
+        </div>
+      </div>
+
+      <div class="admin-panel" style="padding:24px; margin-bottom:20px;">
+        <h3 style="margin-bottom:4px;">Contacto de la tienda</h3>
+        <p class="modal-sub">El WhatsApp recibe los pedidos de la tienda; Instagram y Facebook aparecen en el pie de página.</p>
+        <div class="form-group">
+          <label for="cfgWhatsapp">Número de WhatsApp</label>
+          <input type="text" id="cfgWhatsapp" inputmode="tel" placeholder="Ej. 78411020 (puedes escribirlo con o sin 591)">
+          <p class="form-hint">Si lo dejas vacío se usa el que está en js/config.js.</p>
+        </div>
+        <div class="form-group">
+          <label for="cfgInstagram">Instagram</label>
+          <input type="text" id="cfgInstagram" placeholder="Ej. @couturebite o https://instagram.com/couturebite">
+        </div>
+        <div class="form-group">
+          <label for="cfgFacebook">Facebook</label>
+          <input type="text" id="cfgFacebook" placeholder="Ej. couturebite o https://facebook.com/couturebite">
+        </div>
+      </div>
+
+      <div class="admin-panel" style="padding:24px;">
+        <h3 style="margin-bottom:4px;">Envío</h3>
+        <div class="form-group">
+          <label for="cfgEnvioInfo">Texto de información de envío</label>
+          <textarea id="cfgEnvioInfo" rows="2" placeholder="Ej. Hacemos delivery en toda la ciudad. El costo se confirma por WhatsApp."></textarea>
+        </div>
+      </div>
+
+      <div class="admin-panel" id="cfgOpcionesAviso" style="padding:16px 24px; margin-top:20px; display:none; border-left:4px solid var(--gold);">
+        <b>Opciones extra de la tienda</b>
+        <p class="form-hint" style="margin-top:4px;">Para usar las opciones de abajo (tienda abierta/cerrada, aviso, horario, dirección, costo de envío y consulta de pedido) ejecuta primero <code>sql/14_opciones_tienda.sql</code> en Supabase. Mientras tanto la tienda funciona igual que siempre.</p>
+      </div>
+
+      <div class="admin-panel" style="padding:24px; margin-top:20px;">
+        <div class="cfg-opcion-head">
+          <h3>Tienda abierta</h3>
+          <label class="switch"><input type="checkbox" id="cfgTiendaAbierta" checked><span></span></label>
+        </div>
+        <p class="modal-sub" style="margin-bottom:14px;">Apágalo cuando viajes o no puedas atender: la tienda se sigue viendo, pero no recibe pedidos y muestra tu mensaje arriba.</p>
+        <div class="form-group">
+          <label for="cfgMensajeCerrada">Mensaje cuando está cerrada</label>
+          <input type="text" id="cfgMensajeCerrada" maxlength="200" placeholder="Ej. Estamos de viaje, volvemos a atender el lunes 20.">
+          <p class="form-hint">Si lo dejas vacío se usa: "Por ahora no estamos tomando pedidos. ¡Vuelve pronto!"</p>
+        </div>
+      </div>
+      <div class="admin-panel cfg-opcion" style="padding:24px; margin-top:20px;">
+        <div class="cfg-opcion-head">
+          <h3>Aviso en la tienda</h3>
+          <label class="switch"><input type="checkbox" id="cfgAvisoActivo"><span></span></label>
+        </div>
+        <p class="modal-sub" style="margin-bottom:14px;">Una franja arriba de la página (promociones, feriados, novedades). La clienta la puede cerrar.</p>
+        <div class="form-group">
+          <label for="cfgAvisoTexto">Texto del aviso</label>
+          <input type="text" id="cfgAvisoTexto" maxlength="200" placeholder="Ej. Envío gratis este fin de semana 🎀">
+        </div>
+      </div>
+      <div class="admin-panel cfg-opcion" style="padding:24px; margin-top:20px;">
+        <div class="cfg-opcion-head">
+          <h3>Horario de atención</h3>
+          <label class="switch"><input type="checkbox" id="cfgHorarioActivo"><span></span></label>
+        </div>
+        <p class="modal-sub" style="margin-bottom:14px;">Se muestra en la sección "Dónde estamos".</p>
+        <div class="form-group">
+          <label for="cfgHorarioTexto">Horario</label>
+          <textarea id="cfgHorarioTexto" rows="3" maxlength="300" placeholder="Ej. Lunes a viernes: 9:00 a 19:00&#10;Sábados: 10:00 a 15:00"></textarea>
+        </div>
+      </div>
+      <div class="admin-panel cfg-opcion" style="padding:24px; margin-top:20px;">
+        <div class="cfg-opcion-head">
+          <h3>Dirección y mapa</h3>
+          <label class="switch"><input type="checkbox" id="cfgDireccionActivo"><span></span></label>
+        </div>
+        <p class="modal-sub" style="margin-bottom:14px;">Cambia la dirección y el mapa que se ven en la tienda. Apagado, se usan los de siempre.</p>
+        <div class="form-group">
+          <label for="cfgDireccionTexto">Dirección</label>
+          <input type="text" id="cfgDireccionTexto" maxlength="200" placeholder="Ej. Av. Banzer 3er anillo, Santa Cruz, Bolivia">
+          <p class="form-hint">El mapa busca esta misma dirección en Google Maps.</p>
+        </div>
+      </div>
+      <div class="admin-panel cfg-opcion" style="padding:24px; margin-top:20px;">
+        <div class="cfg-opcion-head">
+          <h3>Costo de envío</h3>
+          <label class="switch"><input type="checkbox" id="cfgEnvioCostoActivo"><span></span></label>
+        </div>
+        <p class="modal-sub" style="margin-bottom:14px;">Se suma al total que paga la clienta y queda guardado en cada pedido. Apagado, el envío sigue siendo solo el texto informativo.</p>
+        <div class="form-row-2">
+          <div class="form-group">
+            <label for="cfgEnvioCosto">Costo de envío (Bs)</label>
+            <input type="number" id="cfgEnvioCosto" min="0" max="10000" step="0.5" placeholder="Ej. 15">
+          </div>
+          <div class="form-group">
+            <label for="cfgEnvioGratisDesde">Gratis desde (Bs) — opcional</label>
+            <input type="number" id="cfgEnvioGratisDesde" min="1" step="1" placeholder="Ej. 300">
+          </div>
+        </div>
+        <p class="form-hint">Si dejas "Gratis desde" vacío, el envío siempre cuesta lo mismo.</p>
+      </div>
+      <div class="admin-panel cfg-opcion" style="padding:24px; margin-top:20px;">
+        <div class="cfg-opcion-head">
+          <h3>Consultar mi pedido</h3>
+          <label class="switch"><input type="checkbox" id="cfgConsultaActivo"><span></span></label>
+        </div>
+        <p class="modal-sub" style="margin-bottom:14px;">Muestra el enlace "Mi pedido" arriba en el menú de la tienda (en el celular, al inicio del menú) y también en el pie de página, para que la clienta vea el estado de sus pedidos con su teléfono y correo (los dos deben coincidir). Apagado, desaparece de los tres lugares.</p>
+
+      </div>
+
+      <div class="admin-panel" style="padding:24px; margin-top:20px;">
+        <h3 style="margin:0 0 4px;">Respaldo</h3>
+        <p class="modal-sub" style="margin-bottom:14px;">Descarga una copia de tus datos en Excel. No cambia nada en la tienda.</p>
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <button type="button" class="btn btn-ghost" id="respaldoPedidosBtn">Descargar pedidos (Excel)</button>
+          <button type="button" class="btn btn-ghost" id="respaldoClientesBtn">Descargar clientes (Excel)</button>
+        </div>
+      </div>
+
+      <div class="admin-panel" style="padding:24px; margin-top:20px;">
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;">
+          <h3 style="margin:0;">Pago con QR</h3>
+          <label class="switch">
+            <input type="checkbox" id="cfgQrActivo">
+            <span></span>
+          </label>
+        </div>
+        <div class="form-group">
+          <label>Imagen de tu código QR</label>
+          <div id="cfgQrPreviewWrap" style="display:none;">
+            <div class="upload-preview"><img id="cfgQrPreviewImg" src="" alt="Vista previa del QR"></div>
+          </div>
+          <div class="upload-zone" id="cfgQrUploadZone">
+            <input type="file" id="cfgQrImageInput" accept="image/png, image/jpeg, image/webp">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            <p><b>Toca aquí para subir la foto de tu QR</b><br>desde tu computadora o celular</p>
+          </div>
+          <div class="upload-progress" id="cfgQrUploadProgress"><div class="upload-progress-bar" id="cfgQrUploadProgressBar"></div></div>
+        </div>
+        <div class="form-row-2">
+          <div class="form-group">
+            <label for="cfgQrBanco">Banco / billetera</label>
+            <input type="text" id="cfgQrBanco" placeholder="Ej. Banco Nacional de Bolivia">
+          </div>
+          <div class="form-group">
+            <label for="cfgQrTitular">A nombre de</label>
+            <input type="text" id="cfgQrTitular" placeholder="Ej. María López">
+          </div>
+        </div>
+      </div>
+
+      <div class="admin-panel" style="padding:24px; margin-top:20px;">
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;">
+          <h3 style="margin:0;">Transferencia bancaria</h3>
+          <label class="switch">
+            <input type="checkbox" id="cfgTransferenciaActivo">
+            <span></span>
+          </label>
+        </div>
+        <div class="form-row-2">
+          <div class="form-group">
+            <label for="cfgTransferenciaBanco">Banco</label>
+            <input type="text" id="cfgTransferenciaBanco" placeholder="Ej. Banco Union">
+          </div>
+          <div class="form-group">
+            <label for="cfgTransferenciaCuenta">Número de cuenta</label>
+            <input type="text" id="cfgTransferenciaCuenta" placeholder="Ej. 1234567890">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="cfgTransferenciaTitular">A nombre de</label>
+          <input type="text" id="cfgTransferenciaTitular" placeholder="Ej. María López">
+        </div>
+      </div>
+
+      <div class="admin-panel" style="padding:24px; margin-top:20px;">
+        <div style="display:flex; align-items:center; justify-content:space-between;">
+          <div>
+            <h3 style="margin:0 0 4px;">Efectivo contra entrega</h3>
+            <p class="modal-sub" style="margin:0;">La clienta paga en el momento de recibir su pedido.</p>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="cfgEfectivoActivo">
+            <span></span>
+          </label>
+        </div>
+      </div>
+
+      <button type="button" class="btn btn-primary" id="saveConfigBtn" style="margin-top:24px;">Guardar configuración</button>
+    </section>
+
+  </main>
+</div>
+
+<!-- ============ VENTANA EMERGENTE: AGREGAR / EDITAR PRODUCTO ============ -->
+<div class="modal-overlay admin-modal" id="productFormModal">
+  <div class="modal-box">
+    <h3 id="productFormTitle">Agregar producto</h3>
+    <p class="modal-sub">Completa la información y sube una fotografía desde tu computadora o celular.</p>
+
+    <form id="productForm">
+      <input type="hidden" id="productId">
+
+      <div class="form-group">
+        <label>Fotografía del producto</label>
+        <div id="uploadPreviewWrap" style="display:none;">
+          <div class="upload-preview"><img id="uploadPreviewImg" src="" alt="Vista previa"></div>
+        </div>
+        <div class="upload-zone" id="uploadZone">
+          <input type="file" id="productImageInput" accept="image/png, image/jpeg, image/webp">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          <p><b>Toca aquí para seleccionar una foto</b><br>desde tu computadora o celular</p>
+        </div>
+        <div class="upload-progress" id="uploadProgress"><div class="upload-progress-bar" id="uploadProgressBar"></div></div>
+      </div>
+
+      <div class="form-group">
+        <label for="productNombre">Nombre del producto</label>
+        <input type="text" id="productNombre" required placeholder="Ej. Vestido Aurora">
+      </div>
+
+      <div class="form-group">
+        <label for="productDescripcion">Descripción</label>
+        <textarea id="productDescripcion" rows="3" placeholder="Describe la tela, el corte y cómo usarlo..."></textarea>
+      </div>
+
+      <div class="form-row-2">
+        <div class="form-group">
+          <label for="productPrecio">Precio (Bs.)</label>
+          <input type="number" id="productPrecio" required min="0" step="0.01" placeholder="180">
+        </div>
+        <div class="form-group">
+          <label for="productCategoria">Categoría</label>
+          <div style="display:flex; gap:8px;">
+            <select id="productCategoria" required style="flex:1;">
+              <option value="">Selecciona...</option>
+            </select>
+            <button type="button" class="btn btn-ghost" id="newCategoriaBtn" title="Agregar o eliminar categorías" style="padding:0 16px; white-space:nowrap;">Categorías</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-row-2">
+        <div class="form-group" style="display:flex; align-items:center; gap:10px;">
+          <input type="checkbox" id="productDestacado" style="width:auto;">
+          <label for="productDestacado" style="margin:0;">Producto destacado</label>
+        </div>
+        <div class="form-group" style="display:flex; align-items:center; gap:10px;">
+          <input type="checkbox" id="productNuevo" style="width:auto;">
+          <label for="productNuevo" style="margin:0;">Marcar como nuevo</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Stock disponible por talla</label>
+        <div class="tallas-manager" id="tallasManager"></div>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-block" id="saveProductBtn" style="margin-top:10px;">Guardar producto</button>
+    </form>
+  </div>
+</div>
+
+<!-- ============ VENTANA EMERGENTE: CONFIRMAR ELIMINACIÓN ============ -->
+<div class="modal-overlay" id="deleteConfirmModal">
+  <div class="modal-box" style="max-width:380px; text-align:center;">
+    <h3>¿Eliminar este producto?</h3>
+    <p class="modal-sub">Esta acción no se puede deshacer.</p>
+    <div style="display:flex; gap:12px; margin-top:10px;">
+      <button class="btn btn-ghost btn-block" onclick="closeModal('deleteConfirmModal')">Cancelar</button>
+      <button class="btn btn-primary btn-block" id="confirmDeleteBtn" style="background:var(--danger);">Eliminar</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ VENTANA EMERGENTE: PRODUCTO CON PEDIDOS (no se puede eliminar) ============ -->
+<div class="modal-overlay" id="cannotDeleteModal">
+  <div class="modal-box" style="max-width:420px; text-align:center;">
+    <h3>Este producto no se puede eliminar</h3>
+    <p class="modal-sub">Ya tiene pedidos registrados, así que borrarlo haría que esos pedidos pierdan la información del producto. En vez de eliminarlo, puedes desactivarlo: desaparecerá de la tienda para tus clientas, pero el historial de ventas se mantiene intacto.</p>
+    <div style="display:flex; gap:12px; margin-top:10px;">
+      <button class="btn btn-ghost btn-block" onclick="closeModal('cannotDeleteModal')">Cancelar</button>
+      <button class="btn btn-primary btn-block" id="confirmDeactivateBtn">Desactivar producto</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ VENTANA EMERGENTE: GESTIONAR CATEGORÍAS ============ -->
+<div class="modal-overlay" id="newCategoriaModal">
+  <div class="modal-box" style="max-width:420px;">
+    <h3>Categorías</h3>
+    <p class="modal-sub">Agrega categorías nuevas o elimina las que ya no uses.</p>
+
+    <div id="categoriaListWrap" style="display:flex; flex-direction:column; gap:8px; margin-top:14px; max-height:220px; overflow-y:auto;">
+      <!-- Generado por JS: lista de categorías existentes -->
+    </div>
+
+    <div class="form-group" style="margin-top:18px; border-top:1px solid var(--champagne); padding-top:16px;">
+      <label for="newCategoriaNombre">Agregar categoría nueva</label>
+      <input type="text" id="newCategoriaNombre" placeholder="Ej. Accesorios, Calzado, Ropa deportiva...">
+      <span class="form-error" id="errNewCategoria">Escribe un nombre para la categoría.</span>
+    </div>
+    <div style="display:flex; gap:12px; margin-top:6px;">
+      <button type="button" class="btn btn-ghost btn-block" onclick="closeModal('newCategoriaModal')">Cerrar</button>
+      <button type="button" class="btn btn-primary btn-block" id="saveNewCategoriaBtn">Crear categoría</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ VENTANA EMERGENTE: CATEGORÍA CON PRODUCTOS (no se puede eliminar) ============ -->
+<div class="modal-overlay" id="cannotDeleteCategoriaModal">
+  <div class="modal-box" style="max-width:400px; text-align:center;">
+    <h3>Esta categoría no se puede eliminar</h3>
+    <p class="modal-sub" id="cannotDeleteCategoriaMsg"></p>
+    <button type="button" class="btn btn-primary btn-block" onclick="closeModal('cannotDeleteCategoriaModal')">Entendido</button>
+  </div>
+</div>
+
+<!-- ============ VENTANA EMERGENTE: DETALLE DE PEDIDO ============ -->
+<div class="modal-overlay" id="orderDetailModal">
+  <div class="modal-box">
+    <h3>Detalle del pedido</h3>
+    <div id="orderDetailContent" style="margin-top:14px;"></div>
+  </div>
+</div>
+
+<!-- ============ VENTANA EMERGENTE: DETALLE DE CLIENTE ============ -->
+<div class="modal-overlay" id="customerDetailModal">
+  <div class="modal-box">
+    <h3>Detalle del cliente</h3>
+    <div id="customerDetailContent" style="margin-top:14px;"></div>
+  </div>
+</div>
+
+<!-- ============ IMAGEN AMPLIADA ============ -->
+<div class="lightbox-overlay" id="lightboxOverlay">
+  <button class="lightbox-close" id="lightboxClose" aria-label="Cerrar imagen ampliada">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </button>
+  <img id="lightboxImg" src="" alt="">
+</div>
+
+<div class="toast-wrap" id="toastWrap"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspdf-autotable@3.8.2/dist/jspdf.plugin.autotable.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+<script src="js/config.js"></script>
+<script src="js/supabaseClient.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/admin/auth.js"></script>
+<script src="js/admin/products.js"></script>
+<script src="js/admin/orders.js"></script>
+<script src="js/admin/customers.js"></script>
+<script src="js/admin/resenas.js"></script>
+<script src="js/admin/config.js"></script>
+<script src="js/admin/stats.js"></script>
+<script src="js/admin/main.js"></script>
+</body>
+</html>
